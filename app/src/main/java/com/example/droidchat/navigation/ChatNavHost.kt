@@ -1,5 +1,6 @@
 package com.example.droidchat.navigation
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
@@ -14,9 +15,9 @@ const val SIGN_UP_ROUTE = "signUp"
 fun ChatNavHost() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = "") {
+    NavHost(navController = navController, startDestination = SPLASH_ROUTE) {
         composable(SPLASH_ROUTE) {
-
+            Text("Hello World")
         }
         composable(SIGN_IN_ROUTE) {
 
