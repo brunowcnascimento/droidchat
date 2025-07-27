@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.example.droidchat.ui.feature.signIn.SignInRoute
 import com.example.droidchat.ui.feature.splash.SplashRoute
 import kotlinx.serialization.Serializable
@@ -25,7 +26,14 @@ fun ChatNavHost() {
         composable<SplashRoute> {
             SplashRoute(
                 onNavigateToSignIn = {
-                    navController.navigate(SignUpRoute)
+                    navController.navigate(
+                        route = SignInRoute,
+                        navOptions = navOptions {
+                            popUpTo(SplashRoute) {
+                                inclusive = true
+                            }
+                        }
+                    )
                 }
             )
         }
