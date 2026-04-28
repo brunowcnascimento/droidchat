@@ -1,28 +1,48 @@
 package com.example.droidchat.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
+import com.example.droidchat.ui.feature.signIn.SignInRoute
+import com.example.droidchat.ui.feature.splash.SplashRoute
+import kotlinx.serialization.Serializable
 
-const val SPLASH_ROUTE = "splash"
-const val SIGN_IN_ROUTE = "signIn"
-const val SIGN_UP_ROUTE = "signUp"
+@Serializable
+object SplashRoute
+
+@Serializable
+object SignInRoute
+
+@Serializable
+object SignUpRoute
 
 @Composable
 fun ChatNavHost() {
     val navController = rememberNavController()
 
-    NavHost(navController = navController, startDestination = SPLASH_ROUTE) {
-        composable(SPLASH_ROUTE) {
-            Text("Hello World")
+    NavHost(navController = navController, startDestination = SplashRoute) {
+        composable<SplashRoute> {
+            SplashRoute(
+                onNavigateToSignIn = {
+                    navController.navigate(
+                        route = SignInRoute,
+                        navOptions = navOptions {
+                            popUpTo(SplashRoute) {
+                                inclusive = true
+                            }
+                        }
+                    )
+                }
+            )
         }
-        composable(SIGN_IN_ROUTE) {
 
+        composable<SignInRoute> {
+            SignInRoute()
         }
-        composable(SIGN_UP_ROUTE) {
+
+        composable<SignUpRoute> {
 
         }
     }
